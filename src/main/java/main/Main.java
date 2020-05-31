@@ -23,7 +23,7 @@ import utils.GuiUtils;
 
 /**
  *
- * @author Cedric Jansen
+ * @author Cedric Jansen, Lukas Gabriel
  */
 public class Main extends javax.swing.JFrame {
 
@@ -34,6 +34,8 @@ public class Main extends javax.swing.JFrame {
         initComponents();
     }
 
+    public boolean darkModeEnabled = false;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -120,6 +122,8 @@ public class Main extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        darkModeEnabledButton = new javax.swing.JRadioButtonMenuItem();
 
         updateFlightDialogue.setTitle("Update Flight");
         updateFlightDialogue.setAlwaysOnTop(true);
@@ -371,7 +375,7 @@ public class Main extends javax.swing.JFrame {
             flightTableInnerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightTableInnerPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(flightScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+                .addComponent(flightScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
                 .addContainerGap())
         );
         flightTableInnerPaneLayout.setVerticalGroup(
@@ -394,7 +398,7 @@ public class Main extends javax.swing.JFrame {
             flightTablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightTablePaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(flightTableInnerPane, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+                .addComponent(flightTableInnerPane, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
 
@@ -539,7 +543,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(flightOverviewID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(flightOverviewStartDest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addComponent(flightOverviewActions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -579,7 +583,7 @@ public class Main extends javax.swing.JFrame {
             flightOverviewPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightOverviewPaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(flightOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                .addComponent(flightOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                 .addGap(200, 200, 200))
         );
 
@@ -595,8 +599,8 @@ public class Main extends javax.swing.JFrame {
         );
         flightContentPaneLayout.setVerticalGroup(
             flightContentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(flightOverviewPane, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
-            .addComponent(flightTablePane, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+            .addComponent(flightOverviewPane, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
+            .addComponent(flightTablePane, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
         );
 
         contentPane.add(flightContentPane, "flightContentPane");
@@ -941,7 +945,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(taskLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(taskScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
+                .addComponent(taskScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout accessTaskPanelLayout = new javax.swing.GroupLayout(accessTaskPanel);
@@ -1001,7 +1005,7 @@ public class Main extends javax.swing.JFrame {
             dishTablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dishTablePaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(dishTable, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+                .addComponent(dishTable, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
 
@@ -1063,6 +1067,19 @@ public class Main extends javax.swing.JFrame {
         jMenu2.setText("Edit");
         menuBar.add(jMenu2);
 
+        jMenu3.setText("View");
+
+        darkModeEnabledButton.setSelected(false);
+        darkModeEnabledButton.setText("Dark Mode");
+        darkModeEnabledButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                darkModeEnabledButtonActionPerformed(evt);
+            }
+        });
+        jMenu3.add(darkModeEnabledButton);
+
+        menuBar.add(jMenu3);
+
         setJMenuBar(menuBar);
 
         pack();
@@ -1123,6 +1140,10 @@ public class Main extends javax.swing.JFrame {
     private void updateFlightDialogueNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFlightDialogueNameInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updateFlightDialogueNameInputActionPerformed
+
+    private void darkModeEnabledButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkModeEnabledButtonActionPerformed
+        darkModeEnabled = true;
+    }//GEN-LAST:event_darkModeEnabledButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1239,6 +1260,7 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accessTaskPanel;
     private javax.swing.JPanel contentPane;
+    private javax.swing.JRadioButtonMenuItem darkModeEnabledButton;
     private javax.swing.JPanel dishContentPane;
     private javax.swing.JPanel dishOverview;
     private javax.swing.JPanel dishOverviewPane;
@@ -1271,6 +1293,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel groupLabel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JPanel lastTasks;
     private javax.swing.JMenuBar menuBar;

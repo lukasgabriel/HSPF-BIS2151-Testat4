@@ -240,6 +240,24 @@
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="View"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="darkModeEnabledButton">
+              <Properties>
+                <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="false" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Dark Mode"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="darkModeEnabledButtonActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
@@ -438,8 +456,8 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="flightOverviewPane" alignment="0" pref="593" max="32767" attributes="0"/>
-                  <Component id="flightTablePane" alignment="0" pref="593" max="32767" attributes="0"/>
+                  <Component id="flightOverviewPane" alignment="0" pref="591" max="32767" attributes="0"/>
+                  <Component id="flightTablePane" alignment="0" pref="591" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -464,7 +482,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="flightTableInnerPane" pref="553" max="32767" attributes="0"/>
+                          <Component id="flightTableInnerPane" pref="551" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -489,7 +507,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="flightScrollPane" pref="593" max="32767" attributes="0"/>
+                              <Component id="flightScrollPane" pref="601" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -579,7 +597,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="flightOverview" pref="373" max="32767" attributes="0"/>
+                          <Component id="flightOverview" pref="371" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -652,7 +670,7 @@
                                   <Component id="flightOverviewID" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="flightOverviewStartDest" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="95" max="32767" attributes="0"/>
                                   <Component id="flightOverviewActions" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1233,7 +1251,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="taskLabel" min="-2" pref="29" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="taskScrollPane" pref="314" max="32767" attributes="0"/>
+                              <Component id="taskScrollPane" pref="318" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1525,7 +1543,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="dishTable" pref="553" max="32767" attributes="0"/>
+                          <Component id="dishTable" pref="551" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                   </Group>
