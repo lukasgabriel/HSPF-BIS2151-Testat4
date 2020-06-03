@@ -8,7 +8,6 @@ import pandas as pd
 import urllib.request
 from datetime import datetime, timedelta
 from hashids import Hashids
-from beeprint import pp
 
 import data.examples
 
@@ -123,15 +122,22 @@ class Dish():
         
         self.flights.append(flight)
 
+    def remove_flight(self, flight):
+        self.flights.remove(flight)
+        print(f'Removed {flight} from {self} in dish record.')
+
     def __str__(self):
         return self.dish_shortname
 
     def __repr__(self):
         return f'Dish({self.dish_data})'
 
-    def __delete__(self):
-        for flight in self.flights:
-            flight.dishes.remove(self) # Why does this not work?
+    def delete(self):
+        while self.flights:
+            for flight in self.flights:
+                flight.remove_dish(self)
+        dishes.remove(self)
+        print(f'Deleting dish {self}...')
         del self
 
 
@@ -223,15 +229,23 @@ class Flight():
         dish.add_flight(self)
         self.dishes.append(dish)
 
+    def remove_dish(self, dish):
+        dish.remove_flight(self)
+        self.dishes.remove(dish)
+        print(f'Removed {dish} from {self} in flight record.')
+
     def __str__(self):
         return self.flight_shortname
 
     def __repr__(self):
         return f'Flight({self.flight_data})'
 
-    def __delete__(self):
-        for dish in self.dishes:
-            dish.flights.remove(self) # Why does this not work?
+    def delete(self):
+        while self.dishes:
+            for dish in self.dishes:
+                self.remove_dish(dish)
+        flights.remove(self)
+        print(f'Deleting flight {self}...')
         del self
 
 
@@ -245,10 +259,9 @@ def new_dish(dish_data: dict) -> Dish:
     dishes.append(dish)
     return
 
- 
+
 for dish in data.examples.example_dishes:
     new_dish(dish)
 
 for flight in data.examples.example_flights:
     new_flight(flight)
-
