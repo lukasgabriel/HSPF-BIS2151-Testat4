@@ -5,9 +5,11 @@ This console application manages the information used by an air travel catering 
 '''
 
 import pandas as pd
+from numpy import nan
 import urllib.request
 from datetime import datetime, timedelta
 from hashids import Hashids
+import random
 
 import data.examples
 
@@ -33,8 +35,11 @@ def load_airports():
     airport_reader = pd.read_csv(filename, usecols=lambda column: column not in [
                                  'elevation_ft', 'gps_code', 'local_code', 'coordinates', 'ident'], engine='c', keep_default_na=False)
     # Drop airports without IATA code (small airports/helipads etc)
+    airport_reader['iata_code'].replace('', nan, inplace=True)
     airports_iata = airport_reader.dropna(subset=['iata_code'])
     airports_indexed = airports_iata.set_index('iata_code')
+    # Add suffixes to duplicate iata values to avoid faulty output
+    airports_indexed.index = airports_indexed.index + airports_indexed.groupby(level=0).cumcount().astype(str).replace('0','')
     return airports_indexed
 airports = load_airports()
 
@@ -60,10 +65,16 @@ def get_airport_data(origin_airport_iata, destination_airport_iata):
     return origin_data, destination_data
 
 def get_country_data(origin_iso_country, destination_iso_country):
-    origin_country = dict(countries.loc[origin_iso_country])[
-        'CLDR display name']
-    destination_country = dict(countries.loc[destination_iso_country])[
-        'CLDR display name']
+    try:
+        origin_country = dict(countries.loc[origin_iso_country])[
+            'CLDR display name']
+    except KeyError:
+        origin_country = 'NaN'
+    try:
+        destination_country = dict(countries.loc[destination_iso_country])[
+            'CLDR display name']
+    except KeyError:
+        destination_country = 'NaN'
     return origin_country, destination_country
 
 
@@ -205,9 +216,9 @@ class Flight():
         self.flight_duration = self.arrival_time - self.departure_time
 
         self.is_intercontinental = True if self.origin_data[
-            'continent'] != self.destination_data['continent'] else False
+            'continent'] is not self.destination_data['continent'] else False
         self.is_international = True if self.origin_data[
-            'iso_country'] != self.destination_data['iso_country'] else False
+            'iso_country'] is not self.destination_data['iso_country'] else False
         self.flight_type = 'Intercontinental' if self.is_intercontinental else 'International' if self.is_international else 'Domestic'
 
         iata_to_ints = ''
@@ -252,16 +263,81 @@ class Flight():
 def new_flight(flight_data: dict) -> Flight:
     flight = Flight(flight_data)
     flights.append(flight)
-    return
+    print(f'Flight {flight.flight_shortname} added.')
+    return flight.flight_id
 
 def new_dish(dish_data: dict) -> Dish:
     dish = Dish(dish_data)
     dishes.append(dish)
-    return
+    print(f'Dish {dish.dish_shortname} added.')
+    return dish.dish_id
 
 
+class Flight_Generator():
+
+    def __init__(self):
+        # Could put parameters to customize generated flights here
+        return
+
+    def __call__(self, x=1):
+        response = []
+        for i in range(x):
+            try:
+                flight_data = {key:0 for key in Flight.flight_data_fields}
+                
+                flight_data['origin_airport_iata'] = airports.sample().index[0]
+                flight_data['destination_airport_iata'] = airports.sample().index[0]
+                if flight_data['origin_airport_iata'] == flight_data['destination_airport_iata']:
+                    self.__call__()
+                    return
+
+                Y = random.randint(2020, 2100)
+                M = random.randint(1, 12)
+                if M in (1, 3, 5, 7, 8, 10, 12):
+                    D = random.randint(1, 31)
+                elif M in (4, 6, 9, 11):
+                    D = random.randint(1, 28)
+                elif M == 2:
+                    D = random.randint(1, 30)
+                h = random.randint(0, 23)
+                m = random.randint(0, 59)
+                hd = random.randint(2, 18)
+                ma = random.randint(0, 59)
+                try:
+                    dt = datetime(Y, M, D, h, m, 00, 000)
+                    at = dt + timedelta(hours=hd, minutes=ma)
+                except:
+                    self.__call__()
+                    return
+                flight_data['departure_time'] = dt
+                flight_data['arrival_time'] = at
+
+                fc = random.randint(0, 16)
+                bc = random.randint(0, 80)
+                ec = random.randint(0, 450)
+                flight_data['passengers'] = {'first_class': fc, 'business_class:': bc, 'economy_class': ec}
+
+                flight = new_flight(flight_data)
+                print('Random flight generated.')
+                response.append(flight)
+            except:
+                continue
+        return response
+
+
+# TODO: Dish_Generator()
+
+
+# Demo Code
 for dish in data.examples.example_dishes:
     new_dish(dish)
 
 for flight in data.examples.example_flights:
     new_flight(flight)
+
+fgen = Flight_Generator()
+fgen(5)
+
+for flight in flights:
+    print(flight.flight_description)
+# ---
