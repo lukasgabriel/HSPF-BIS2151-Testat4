@@ -71,6 +71,10 @@ public class Item {
      
     }
     
+    public void update(String name) {
+        this.name = name;
+    }
+    
     
     // Static getters
     

@@ -24,50 +24,56 @@ import main.Main;
  *
  * @author Cedric Jansen
  */
-public class FlightTableController extends TableController {
+public class DishTableController extends TableController {
 
-    private JLabel flightTitle;
-    private JLabel flightIDLabel;
-    private JLabel flightStartAirportLabel;
-    private JLabel flightdestAirportLabel;
-    private JLabel flightOverviewDishContent;
+    private JLabel dishTitle;
+    private JLabel dishIDLabel;
+    private JLabel dishVeganLabel;
+    private JLabel dishVegetarianLabel;
+    private JLabel dishPriceLabel;
+    private JLabel dishOvervieFlightContent;
 
-    private Flight currentSelectedFlight;
+    private Dish currentSelectedDish;
 
-
-    public FlightTableController(Main main, JTable table) {
+    public DishTableController(Main main, JTable table) {
         super(main, table);
 
-        flightTitle = main.getFlightOverviewTitle();
-        flightIDLabel = main.getFlightOverviewIDContent();
-        flightStartAirportLabel = main.getFlightOverviewStartContent();
-        flightdestAirportLabel = main.getFlightOverviewDestContent();
-        flightOverviewDishContent = main.getFlightOverviewDishContent();
+        dishTitle = main.getDishOverviewTitle();
+        dishIDLabel = main.getDishOverviewIDContent();
+        dishVeganLabel = main.getDishOverviewVeganContent();
+        dishVegetarianLabel = main.getDishOverviewVegetariannContent();
+        dishPriceLabel = main.getDishPriceContent();
+        dishOvervieFlightContent = main.getDishOverviewFlightContent();
 
-       
     }
 
     @Override
     public void populate() {
         DefaultTableModel defaultTable = (DefaultTableModel) table.getModel();
-        ArrayList<Flight> flightsFromDb = dataBase.getDeserializedFlights();
+        ArrayList<Dish> dishesFromDb = dataBase.getDeserializedDishes();
 
-        for (Flight flight : flightsFromDb) {
-            defaultTable.addRow(new Object[]{flight.getName(), flight.getId(), flight.getStartPoint(), flight.getDestinationAirport()});
+        for (Dish dish : dishesFromDb) {
+            defaultTable.addRow(new Object[]{dish.getName(), dish.getId(), dish.isVegan(), dish.isVegetarian(), dish.getPrice()});
         }
+
     }
 
-    // Refreshes the table row when an flight is updated
-    public void refreshFlightRow(Flight flight) {
+    // Refreshes the table row when a dish is updated
+    public void refreshDishRow(Dish dish) {
         DefaultTableModel defaultTable = (DefaultTableModel) table.getModel();
         int selectedRow = selectionPointer;
-        String name = flight.getName();
-        String start = flight.getStartAirport();
-        String dest = flight.getDestinationAirport();
-        System.out.println("refresh row_: " + flight);
+        String name = dish.getName();
+        boolean vegan = dish.isVegan();
+        boolean vegetarian = dish.isVegetarian();
+        if (vegan) {
+            vegetarian = true;
+        }
+        float price = dish.getPrice();
+
         defaultTable.setValueAt(name, selectedRow, 0);
-        defaultTable.setValueAt(start, selectedRow, 2);
-        defaultTable.setValueAt(dest, selectedRow, 3);
+        defaultTable.setValueAt(vegan, selectedRow, 2);
+        defaultTable.setValueAt(vegetarian, selectedRow, 3);
+        defaultTable.setValueAt(price, selectedRow, 4);
         // Update the right overview panel
         //updateOverview(selectedRow);
         // Redraw the table
@@ -85,47 +91,51 @@ public class FlightTableController extends TableController {
 
         table.getModel().addTableModelListener((TableModelEvent evt) -> {
             // Updates the flight references when the table is directly edited
-            updateFlightList(evt);
+            updateDishList(evt);
 
         });
     }
-    
-    // Add a flight to the table
-    public void addFlight(Flight f) {
+
+    // Add a dish to the table
+    public void addDish(Dish d) {
         DefaultTableModel defaultTable = (DefaultTableModel) table.getModel();
-        
+
         //Build an object array with representative strings of the object
-        Object[] dataLine = new Object[4];
+        Object[] dataLine = new Object[5];
         //Get the values
-        String name = f.getName();
-        String id = f.getId();
-        String start = f.getStartAirport();
-        String dest = f.getDestinationAirport();
-        
+        String name = d.getName();
+        String id = d.getId();
+        boolean vegan = d.isVegan();
+        boolean vegetarian = d.isVegetarian();
+        if (vegan) {
+            vegetarian = true;
+        }
+        float price = d.getPrice();
+
         // Pass the values into the array. Could be done when initializing the array
         // but this approach is chosen to improve readability.
         dataLine[0] = name;
         dataLine[1] = id;
-        dataLine[2] = start;
-        dataLine[3] = dest;
+        dataLine[2] = vegan;
+        dataLine[3] = vegetarian;
+        dataLine[4] = price;
         //Add the dataLine with the data to the table model.
         defaultTable.addRow(dataLine);
     }
-    
-    
+
     // Delete the selected flight
     public void deleteSelected() {
         DefaultTableModel defaultTable = (DefaultTableModel) table.getModel();
-        String id = currentSelectedFlight.getId();
-        
-        for( int i = 0; i < defaultTable.getRowCount(); i++) {
+        String id = currentSelectedDish.getId();
+
+        for (int i = 0; i < defaultTable.getRowCount(); i++) {
             String rowId = (String) defaultTable.getValueAt(i, 1);
-            if(rowId.equals(id)) {
+            if (rowId.equals(id)) {
                 //if id stored in the row is the flight id, remove it from the table
                 selectionPointer = -1;
-                currentSelectedFlight = null;
+                currentSelectedDish = null;
                 defaultTable.removeRow(i);
-                
+
                 clearOverview();
                 break;
             }
@@ -134,7 +144,7 @@ public class FlightTableController extends TableController {
     }
 
     //Updates the flight reference when the flight table is directly edited.
-    private void updateFlightList(TableModelEvent event) {
+    private void updateDishList(TableModelEvent event) {
         if (event.getType() == TableModelEvent.UPDATE) {
             int row = event.getFirstRow();
             int lastRow = event.getLastRow();
@@ -142,104 +152,131 @@ public class FlightTableController extends TableController {
                 // fetch updated values
                 String id = (String) table.getValueAt(i, 1);
                 String name = (String) table.getValueAt(i, 0);
-                String startAirport = (String) table.getValueAt(i, 2);
-                String destAirport = (String) table.getValueAt(i, 3);
-                Flight flightToUpdate = Flight.flightById(id);
+                boolean vegan = (boolean) table.getValueAt(i, 2);
+                boolean vegetarian = (boolean) table.getValueAt(i, 3);
+                if (vegan) {
+                    vegetarian = true;
+                }
+                float price = (float) table.getValueAt(i, 4);
+                Dish dishToUpdate = Dish.getDishById(id);
                 // update the flight reference
-                flightToUpdate.update(name, startAirport, destAirport);
+                dishToUpdate.update(name, vegan, vegetarian, price);
                 updateOverview(i);
             }
         }
     }
-    
+
     private void clearOverview() {
-        flightIDLabel.setText("");
-        flightStartAirportLabel.setText("");
-        flightdestAirportLabel.setText("");
-        flightOverviewDishContent.setText(""); 
+        dishIDLabel.setText("");
+        dishVeganLabel.setText("");
+        dishVegetarianLabel.setText("");
+        dishPriceLabel.setText("");
+        dishOvervieFlightContent.setText("");
     }
 
     // Updates the overview when the selection of the table is changes
-    public void updateOverview(Flight f) {
+    public void updateOverview(Dish dish) {
         int selectedRow = selectionPointer;
         DefaultTableModel defaultTable = (DefaultTableModel) table.getModel();
-        
-        String name = f.getName();
-        String start = f.getStartAirport();
-        String dest = f.getDestinationAirport();
-        
-        defaultTable.setValueAt(name, selectedRow, 0);
-        defaultTable.setValueAt(start, selectedRow, 2);
-        defaultTable.setValueAt(dest, selectedRow, 3);
         String dishes;
+        String name = dish.getName();
+        boolean vegan = dish.isVegan();
+        boolean vegetarian = dish.isVegetarian();
+        if (vegan) {
+            vegetarian = true;
+        }
+        float price = dish.getPrice();
 
-        currentSelectedFlight = f;
-        dishes = buildDishString();
+        defaultTable.setValueAt(name, selectedRow, 0);
+        defaultTable.setValueAt(vegan, selectedRow, 2);
+        defaultTable.setValueAt(vegetarian, selectedRow, 3);
+        defaultTable.setValueAt(price, selectedRow, 4);
+
+        currentSelectedDish = dish;
+        dishes = buildFlightString();
         // Remove the annotation, that a flight needs to be selected
         main.getFlightOverviewActionsFeedbackLabel().setText("");
 
-        flightIDLabel.setText(f.getId());
-        flightStartAirportLabel.setText(f.getStartAirport());
-        flightdestAirportLabel.setText(f.getDestinationAirport());
-        // Add the dish string
-        flightOverviewDishContent.setText(dishes);
+        dishIDLabel.setText(dish.getId());
+        dishVeganLabel.setText(String.valueOf(dish.isVegan()));
+        dishVegetarianLabel.setText(String.valueOf(dish.isVegetarian()));
+        dishPriceLabel.setText(Float.toString(dish.getPrice()));
+        // Add the flight string
+        dishOvervieFlightContent.setText(dishes);
 
     }
 
-    
     // Updates the overview and reloads the table row with the selected row
     // to display changes in between changes of the flight object.
     public void updateOverview() {
-        if(selectionPointer == -1) {
+        if (selectionPointer == -1) {
             return;
         }
         int selectedRow = selectionPointer;
         DefaultTableModel defaultTable = (DefaultTableModel) table.getModel();
-        
+
         String id = tryToFetchAttribute(1, selectedRow);
-        Flight f = Flight.flightById(id);
+        System.out.println(id);
+        Dish dish = Dish.getDishById(id);
+        String name = dish.getName();
+        boolean vegan = dish.isVegan();
+        boolean vegetarian = dish.isVegetarian();
+        if (vegan) {
+            vegetarian = true;
+        }
+        float price = dish.getPrice();
+        currentSelectedDish = dish;
+        String flights;
 
-        defaultTable.setValueAt(f.getName(), selectedRow, 0);
-        defaultTable.setValueAt(f.getStartAirport(), selectedRow, 2);
-        System.out.println(f.getStartAirport());
-        defaultTable.setValueAt(f.getDestinationAirport(), selectedRow, 3);
-        String dishes;
+        defaultTable.setValueAt(name, selectedRow, 0);
+        defaultTable.setValueAt(vegan, selectedRow, 2);
 
-        currentSelectedFlight = f;
-        dishes = buildDishString();
+        defaultTable.setValueAt(vegetarian, selectedRow, 3);
+        defaultTable.setValueAt(price, selectedRow, 4);
+
+        flights = buildFlightString();
 
         // Remove the annotation, that a flight needs to be selected
         main.getFlightOverviewActionsFeedbackLabel().setText("");
 
-        flightIDLabel.setText(f.getId());
-        flightStartAirportLabel.setText(f.getStartAirport());
-        flightdestAirportLabel.setText(f.getDestinationAirport());
-
-        // Add the dish string
-        flightOverviewDishContent.setText(dishes);
+        dishIDLabel.setText(dish.getId());
+        dishVeganLabel.setText(String.valueOf(dish.isVegan()));
+        dishVegetarianLabel.setText(String.valueOf(dish.isVegetarian()));
+        dishPriceLabel.setText(Float.toString(dish.getPrice()));
+        // Add the flight string
+        dishOvervieFlightContent.setText(flights);
     }
 
     // Update the overview with the values from a given row
     private void updateOverview(int row) {
         String id = tryToFetchAttribute(1, row);
-        String startAirport = tryToFetchAttribute(2, row);
-        String destinationAirport = tryToFetchAttribute(3, row);
-        flightIDLabel.setText(id);
-        flightStartAirportLabel.setText(startAirport);
-        flightdestAirportLabel.setText(destinationAirport);
+        String flights = buildFlightString();
+        boolean vegan = Boolean.valueOf(tryToFetchAttribute(2, row));
+        boolean vegetarian = Boolean.valueOf(tryToFetchAttribute(3, row));
+        if (vegan) {
+            vegetarian = true;
+        }
+        float price = Float.valueOf(tryToFetchAttribute(4, row));
+
+        dishIDLabel.setText(id);
+        dishVeganLabel.setText(String.valueOf(vegan));
+        dishVegetarianLabel.setText(String.valueOf(vegetarian));
+        dishPriceLabel.setText(Float.toString(price));
+        // Add the flight string
+        dishOvervieFlightContent.setText(flights);
     }
 
     // Builds the string of dishes stored within a flight
-    private String buildDishString() {
+    private String buildFlightString() {
         String result = "";
         int iterator = 1;
-        ArrayList<Dish> dishes = currentSelectedFlight.getDishes();
-        if (dishes.isEmpty()) {
-            return "No dishes assigned to this flight...";
+        ArrayList<Flight> flights = currentSelectedDish.getFlights();
+        if (flights.isEmpty()) {
+            return "No flights assigned to this dish...";
         }
-        for (Dish d : dishes) {
-            result += d.getName() + " : " + d.getId() + "";
-            if (dishes.size() > 1) {
+        for (Flight f : flights) {
+            result += f.getName() + " : " + f.getId() + "";
+            if (flights.size() > 1) {
                 result += ",  ";
                 if (iterator % 2 == 0) {
                     // Add line break
@@ -263,7 +300,7 @@ public class FlightTableController extends TableController {
         } catch (NullPointerException ex) {
             result = "";
         }
-        
+
         return result;
     }
 
@@ -280,11 +317,9 @@ public class FlightTableController extends TableController {
         return null;
     }
 
-    public Flight getSelectedFlight() {
-        return currentSelectedFlight;
+    public Dish getSelectedDish() {
+        return currentSelectedDish;
     }
-
-    
 
     public TableModel getDefaultTable() {
         return this.table.getModel();

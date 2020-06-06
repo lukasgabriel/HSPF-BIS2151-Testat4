@@ -51,6 +51,26 @@ public class Dish extends Item {
     
     }
     
+    // Updates the object
+    public void update(String name, boolean isVegan, boolean isVegetarian, float price) {
+        update(name);
+        this.isVegan = isVegan;
+        this.isVegetarian = isVegetarian;
+        this.price = price;
+    }
+    
+    // Return a dish with given id
+    public static Dish getDishById( String id ) {
+        for( Dish d: getAllDishes()) {
+            if( d.getId().equals(id)) {
+                return d;
+            }
+        }
+        return null;
+    }
+    
+    
+    
     @Override
     public void add(Object object) {
         super.add(object);
