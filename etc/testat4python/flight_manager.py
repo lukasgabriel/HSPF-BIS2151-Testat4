@@ -325,7 +325,28 @@ class Flight_Generator():
         return response
 
 
-# TODO: Dish_Generator()
+class Dish_Generator():
+    allergens = ['peanuts', 'tree nuts', 'milk', 'eggs', 'fish', 'shellfish', 'soy', 'wheat', 'sesame seeds', 'mustard', 'sulphites', 'gluten', 'celery', 'lupin']
+
+    def __init__(self):
+        # Could put parameters to customize generated dishes here
+        return
+
+    def __call__(self, x=1):
+        response = []
+        for i in range(x):
+            try:
+                dish_data = {key:0 for key in Dish.dish_data_fields}
+
+                dish_data['dish_type'] = random.choice(Dish.dish_types.keys)
+                dish_data['is_vegetarian'] = random.choice([False, True])
+                dish_data['is_vegan'] = random.choice([False, True]) if dish_data['is_vegetarian'] == True else False
+                dish_data['is_alcohol'] = random.choice([False, True]) if dish_data['is_vegetarian'] == 'cold-beverage' else False
+                dish_data['allergens'] = random.choices(population=allergens, k=random.randint(0, 5))
+                dish_data['price'] = round(random.random(0.5, 25), 2)
+                dish_data['weight'] = random.randint(25, 500)
+                dish_data['calories'] = random.randint(50, 1000)
+                dish_data['dish_name'] = 
 
 
 # Demo Code
