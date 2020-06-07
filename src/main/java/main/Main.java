@@ -1174,6 +1174,7 @@ public class Main extends javax.swing.JFrame {
         setTitle("EAF: Eat&Fly Management");
         setBackground(new java.awt.Color(230, 230, 230));
         setFont(new java.awt.Font("Roboto Condensed", 0, 10)); // NOI18N
+        setIconImage(new ImageIcon(getClass().getClassLoader().getResource("main/icon_128.png")).getImage());
         setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(1340, 800));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.X_AXIS));
