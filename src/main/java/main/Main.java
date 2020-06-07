@@ -1306,7 +1306,7 @@ public class Main extends javax.swing.JFrame {
             flightTableInnerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightTableInnerPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(flightScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+                .addComponent(flightScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
                 .addContainerGap())
         );
         flightTableInnerPaneLayout.setVerticalGroup(
@@ -1323,13 +1323,13 @@ public class Main extends javax.swing.JFrame {
             flightTablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, flightTablePaneLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(flightTableInnerPane, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE))
+                .addComponent(flightTableInnerPane, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
         );
         flightTablePaneLayout.setVerticalGroup(
             flightTablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightTablePaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(flightTableInnerPane, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+                .addComponent(flightTableInnerPane, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
 
@@ -1491,7 +1491,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(flightOverviewDestLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(flightOverviewDestContent, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         flightOverviewStartDestLayout.setVerticalGroup(
             flightOverviewStartDestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1578,14 +1578,14 @@ public class Main extends javax.swing.JFrame {
             flightOverviewPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightOverviewPaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(flightOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addComponent(flightOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
                 .addGap(50, 50, 50))
         );
         flightOverviewPaneLayout.setVerticalGroup(
             flightOverviewPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightOverviewPaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(flightOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                .addComponent(flightOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                 .addGap(200, 200, 200))
         );
 
@@ -1595,14 +1595,14 @@ public class Main extends javax.swing.JFrame {
             flightContentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightContentPaneLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(flightTablePane, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+                .addComponent(flightTablePane, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(flightOverviewPane, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE))
+                .addComponent(flightOverviewPane, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
         );
         flightContentPaneLayout.setVerticalGroup(
             flightContentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(flightOverviewPane, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
-            .addComponent(flightTablePane, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+            .addComponent(flightOverviewPane, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
+            .addComponent(flightTablePane, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
         );
 
         contentPane.add(flightContentPane, "flightContentPane");
@@ -1679,7 +1679,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(overviewContentSecondTitle)
                             .addComponent(overviewContentThirdTitle)
                             .addComponent(jLabel1))
-                        .addGap(0, 301, Short.MAX_VALUE)))
+                        .addGap(0, 300, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         overviewContentLayout.setVerticalGroup(
@@ -1768,7 +1768,7 @@ public class Main extends javax.swing.JFrame {
         quickAccessFlightTabLayout.setHorizontalGroup(
             quickAccessFlightTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(quickAccessFlightTabLayout.createSequentialGroup()
-                .addContainerGap(209, Short.MAX_VALUE)
+                .addContainerGap(223, Short.MAX_VALUE)
                 .addComponent(quickAccessFlightCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(quickAccessFlightDeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1822,7 +1822,7 @@ public class Main extends javax.swing.JFrame {
         quickAccessDishTabLayout.setHorizontalGroup(
             quickAccessDishTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(quickAccessDishTabLayout.createSequentialGroup()
-                .addContainerGap(209, Short.MAX_VALUE)
+                .addContainerGap(223, Short.MAX_VALUE)
                 .addComponent(quickAccessDishCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(quickAccessDishDeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1848,7 +1848,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(quickAcessLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(quickAccessTabPane, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
+            .addComponent(quickAccessTabPane)
         );
         quickAccessLayout.setVerticalGroup(
             quickAccessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1898,7 +1898,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(taskLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(taskScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
+                .addComponent(taskScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout accessTaskPanelLayout = new javax.swing.GroupLayout(accessTaskPanel);
@@ -1907,9 +1907,9 @@ public class Main extends javax.swing.JFrame {
             accessTaskPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(accessTaskPanelLayout.createSequentialGroup()
                 .addGroup(accessTaskPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lastTasks, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
-                    .addComponent(quickAccess, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                    .addComponent(lastTasks, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
+                    .addComponent(quickAccess, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         accessTaskPanelLayout.setVerticalGroup(
             accessTaskPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2004,13 +2004,13 @@ public class Main extends javax.swing.JFrame {
             dishTablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dishTablePaneLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(dishTablePaneInner, javax.swing.GroupLayout.PREFERRED_SIZE, 563, Short.MAX_VALUE))
+                .addComponent(dishTablePaneInner, javax.swing.GroupLayout.PREFERRED_SIZE, 576, Short.MAX_VALUE))
         );
         dishTablePaneLayout.setVerticalGroup(
             dishTablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dishTablePaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(dishTablePaneInner, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+                .addComponent(dishTablePaneInner, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
 
@@ -2185,7 +2185,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(dishOverviewPriceLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(dishOverviewPriceContent, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         dishOverviewAttrLayout.setVerticalGroup(
             dishOverviewAttrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2278,14 +2278,14 @@ public class Main extends javax.swing.JFrame {
             dishOverviewPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dishOverviewPaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(dishOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                .addComponent(dishOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
                 .addGap(50, 50, 50))
         );
         dishOverviewPaneLayout.setVerticalGroup(
             dishOverviewPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dishOverviewPaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(dishOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                .addComponent(dishOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                 .addGap(200, 200, 200))
         );
 
@@ -2910,6 +2910,7 @@ public class Main extends javax.swing.JFrame {
     //Setup method. Only overview pane should be visible when the application starts
     // We chose this design choise so that it is easy to add more content to the frame.
     private Main init() {
+        setIconImage(new ImageIcon(getClass().getClassLoader().getResource("main/icon_128.png")).getImage());
         // Get the layout manager defined in the netbeans designer
         layoutManager = (CardLayout) contentPane.getLayout();
 
