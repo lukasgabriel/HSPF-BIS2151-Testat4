@@ -43,6 +43,7 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     public Main() {
+     
         initComponents();
     }
 
@@ -1174,7 +1175,7 @@ public class Main extends javax.swing.JFrame {
         setTitle("EAF: Eat&Fly Management");
         setBackground(new java.awt.Color(230, 230, 230));
         setFont(new java.awt.Font("Roboto Condensed", 0, 10)); // NOI18N
-        setIconImage(new ImageIcon(getClass().getClassLoader().getResource("main/icon_128.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getClassLoader().getResource("icon_128.png")).getImage());
         setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(1340, 800));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.X_AXIS));
@@ -1330,7 +1331,7 @@ public class Main extends javax.swing.JFrame {
             flightTablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightTablePaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(flightTableInnerPane, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+                .addComponent(flightTableInnerPane, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
 
@@ -1586,7 +1587,7 @@ public class Main extends javax.swing.JFrame {
             flightOverviewPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(flightOverviewPaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(flightOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                .addComponent(flightOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                 .addGap(200, 200, 200))
         );
 
@@ -1602,8 +1603,8 @@ public class Main extends javax.swing.JFrame {
         );
         flightContentPaneLayout.setVerticalGroup(
             flightContentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(flightOverviewPane, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
-            .addComponent(flightTablePane, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
+            .addComponent(flightOverviewPane, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+            .addComponent(flightTablePane, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
         );
 
         contentPane.add(flightContentPane, "flightContentPane");
@@ -1700,7 +1701,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(overviewContentThirdTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(overviewContentThirdScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
         );
@@ -1899,7 +1900,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(taskLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(taskScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
+                .addComponent(taskScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout accessTaskPanelLayout = new javax.swing.GroupLayout(accessTaskPanel);
@@ -2011,7 +2012,7 @@ public class Main extends javax.swing.JFrame {
             dishTablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dishTablePaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(dishTablePaneInner, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+                .addComponent(dishTablePaneInner, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
 
@@ -2286,7 +2287,7 @@ public class Main extends javax.swing.JFrame {
             dishOverviewPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dishOverviewPaneLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(dishOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                .addComponent(dishOverview, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                 .addGap(200, 200, 200))
         );
 
@@ -2314,7 +2315,6 @@ public class Main extends javax.swing.JFrame {
         basicDataMenu.setText("Basic Data");
 
         overviewMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, 0));
-        overviewMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/overviewIcon.png"))); // NOI18N
         overviewMenu.setText("Overview");
         overviewMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2911,7 +2911,9 @@ public class Main extends javax.swing.JFrame {
     //Setup method. Only overview pane should be visible when the application starts
     // We chose this design choise so that it is easy to add more content to the frame.
     private Main init() {
-        setIconImage(new ImageIcon(getClass().getClassLoader().getResource("main/icon_128.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getClassLoader().getResource("icon_128.png")).getImage());
+        
+        
         // Get the layout manager defined in the netbeans designer
         layoutManager = (CardLayout) contentPane.getLayout();
 
