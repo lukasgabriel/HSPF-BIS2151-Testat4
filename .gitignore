@@ -38,3 +38,6 @@ etc/testat4python/.vscode/settings.json
 .settings/org.eclipse.jdt.core.prefs
 .settings/org.eclipse.jdt.apt.core.prefs
 .settings/org.eclipse.core.resources.prefs
+nbactions.xml
+target/classes/main/icon_128.png
+target/classes/main/icon_128.png
